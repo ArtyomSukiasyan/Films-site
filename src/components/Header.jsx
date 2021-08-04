@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Header({ handleChange }) {
   return (
     <header>
-      <Disclosure as="nav" className="bg-gray-900 fixed  w-full">
+      <Disclosure as="nav" className="bg-gray-900 fixed z-50  w-full">
         <div className="max-w-10xl mx-auto px-2 sm:px-2 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
