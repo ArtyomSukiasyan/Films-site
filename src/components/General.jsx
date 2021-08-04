@@ -21,7 +21,6 @@ export default function General() {
   const [state, setState] = useState([]);
   const [page, setPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
-  const [filmInfo, setFilmInfo] = useState();
   let history = useHistory();
 
   const getData = useMemo(
@@ -60,13 +59,9 @@ export default function General() {
     axios({
       method: "GET",
       url: apiUrl,
-    })
-      .then((res) => {
-        setFilmInfo(res.data);
-      })
-      .catch((err) => {
-        console.warn(err);
-      });
+    }).catch((err) => {
+      console.warn(err);
+    });
   }
 
   return (

@@ -28,7 +28,7 @@ export default function Films({ state, handleChange, handleClickInfo }) {
                 </figure>
                 <div className="rounded-lg p-4 bg-gray-600	 flex flex-col">
                   <div>
-                    <h5 className="text-white text-2xl font-bold leading-none ">
+                    <h5 className="mb-6 text-center text-white text-2xl font-bold leading-none ">
                       {film.title}
                     </h5>
                   </div>
@@ -47,7 +47,7 @@ export default function Films({ state, handleChange, handleClickInfo }) {
                     })}
                   </div>
                   <div className="flex items-center justify-center">
-                    <button className="rounded-full bg-gray-900 text-white hover:bg-white hover:text-purple-900 hover:shadow-xl focus:outline-none w-10 h-10 flex  transition duration-300">
+                    <button className="mt-6 rounded-full bg-gray-900 text-white hover:bg-white hover:text-purple-900 hover:shadow-xl focus:outline-none w-10 h-10 flex  transition duration-300">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="32"
