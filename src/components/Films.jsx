@@ -1,10 +1,10 @@
-import Navbar from "./Navbar";
+import Header from "./Header";
 import dataGenre from "./DataGenre";
 
 export default function Films({ state, handleChange, handleClickInfo }) {
   return (
     <>
-      <Navbar handleChange={handleChange} />
+      <Header handleChange={handleChange} />
       <div className="flex flex-wrap  bg-indigo-100 pt-16">
         <div className="container ml-auto mr-auto">
           {state.map((film) => (
