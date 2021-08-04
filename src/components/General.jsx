@@ -2,11 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import Films from "./Films";
 import axios from "axios";
-import FetchData from "./FetchData"
-import SearchData from "./SearchData"
-
-
-
+import FetchData from "./FetchData";
+import SearchData from "./SearchData";
+import Login from "./Login";
+import SignIn from "./Signin"
 
 export default function General() {
   const [state, setState] = useState([]);
@@ -64,6 +63,12 @@ export default function General() {
             state={state}
             handleClickInfo={handleClickInfo}
           />
+        </Route>
+        <Route exact path="/sign-in">
+          <SignIn />
+        </Route>
+        <Route exact path="/login">
+          <Login />
         </Route>
       </Switch>
     </>
