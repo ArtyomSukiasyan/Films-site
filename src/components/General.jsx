@@ -6,6 +6,7 @@ import FetchData from "./FetchData";
 import SearchData from "./SearchData";
 import Login from "./Login";
 import SignIn from "./Signin"
+import LogOut from "./LogOut";
 
 export default function General() {
   const [state, setState] = useState([]);
@@ -70,6 +71,10 @@ export default function General() {
         <Route exact path="/login">
           <Login />
         </Route>
+        <Route exact path="/logout">
+          <LogOut />
+        </Route>
+
       </Switch>
     </>
   );

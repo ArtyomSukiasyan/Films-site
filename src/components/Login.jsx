@@ -1,5 +1,5 @@
 import React from "react";
-
+import Header from "./Header";
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -80,53 +80,54 @@ export default class Login extends React.Component {
       !this.state.isExistEmail;
     return (
       <>
-        <main >
-          <div >
-            
-            <h1>
-              Log in
-            </h1>
-            <form  noValidate>
+        <Header />
+        <div className="w-full h-screen pt-32">
+          <div className="text-center mb-4 text-4xl">
+            <h1>Log in</h1>
+          </div>
+          <div className="flex justify-center">
+            <form noValidate className="w-full md:w-1/3 rounded-lg">
               <input
+                className="mt-6 px-8  w-full border rounded py-2 text-gray-700 focus:outline-none"
                 value={this.state.email}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                placeholder="Email Address"
                 name="email"
                 autoComplete="email"
                 onChange={this.handleChangeEmail}
               />
               <p>{this.state.isExistEmail}</p>
               <input
+                className="mt-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none"
                 value={this.state.password}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                placeholder="Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
                 onChange={this.handleChangePassword}
               />
-              <p>{this.state.isWrongPassword}</p>
               <button
+                className="mt-6 w-full py-2 rounded-full bg-gray-900 text-gray-100 focus:outline-none"
                 type="submit"
-                fullWidth
                 variant="contained"
                 color="primary"
                 disabled={!checkValidation}
                 onClick={this.onRegister}
               >
-                Log in
+                Sign in
               </button>
             </form>
           </div>
-        </main>
+        </div>
       </>
     );
   }

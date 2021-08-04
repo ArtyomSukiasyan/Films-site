@@ -32,13 +32,20 @@ export default function Header({ handleChange }) {
                     handleChange(e.target.value);
                   }}
                 />
-                {localStorage.getItem("currentUser") ? null :
-                <button className="text-gray-300 hover:bg-gray-700 hover:text-white px-20 py-2 rounded-md text-sm font-medium">
-                  <Link to="/sign-in">Sign in</Link>
-                </button>}
-                <button className="text-gray-300 hover:bg-gray-700 hover:text-white px-20 py-2 rounded-md text-sm font-medium">
-                  <Link to="/login">Log in</Link>
-                </button>
+                {localStorage.getItem("currentUser") ? null : (
+                  <button className="text-gray-300 hover:bg-gray-700 hover:text-white px-20 py-2 rounded-md text-sm font-medium">
+                    <Link to="/sign-in">Sign in</Link>
+                  </button>
+                )}
+                {localStorage.getItem("currentUser") ? (
+                  <button className="text-gray-300 hover:bg-gray-700 hover:text-white px-20 py-2 rounded-md text-sm font-medium">
+                    <Link to="/login">Log out</Link>
+                  </button>
+                ) : (
+                  <button className="text-gray-300 hover:bg-gray-700 hover:text-white px-20 py-2 rounded-md text-sm font-medium">
+                    <Link to="/login">Log in</Link>
+                  </button>
+                )}
               </div>
             </div>
           </div>
