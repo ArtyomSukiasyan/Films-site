@@ -5,7 +5,7 @@ import axios from "axios";
 import FetchData from "./FetchData";
 import SearchData from "./SearchData";
 import Login from "./Login";
-import SignIn from "./Signin"
+import SignIn from "./Signin";
 import LogOut from "./LogOut";
 
 export default function General() {
@@ -68,13 +68,15 @@ export default function General() {
         <Route exact path="/sign-in">
           <SignIn />
         </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/logout">
-          <LogOut />
-        </Route>
-
+        {localStorage.getItem("currentUser") ? (
+          <Route exact path="/logout">
+            <LogOut />
+          </Route>
+        ) : (
+          <Route exact path="/login">
+            <Login />
+          </Route>
+        )}
       </Switch>
     </>
   );

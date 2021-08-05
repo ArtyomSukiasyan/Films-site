@@ -1,53 +1,47 @@
 import React from "react";
 import Header from "./Header";
+import { useState } from "react";
 
-export default class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-      isExistEmail: "",
-      isWrongPassword: "",
-      isValidEmail: false,
-      isValidPassword: false,
-    };
-  }
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isExistEmail, setIsExistEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isWrongPassword, setIsWrongPassword] = useState("");
+  const [isValidPassword, setIsValidPassword] = useState(false);
 
-  handleChangeEmail = (e) => {
-    this.setState({ email: e.target.value, isExistEmail: "" });
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+    setIsExistEmail("");
     const mailCheck =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const isValid = mailCheck.test(e.target.value);
     if (isValid) {
-      this.setState({ isValidEmail: true });
+      setIsValidEmail(true);
     } else if (e.target.value === "") {
-      this.setState({ isValidEmail: false });
+      setIsValidEmail(false);
     } else {
-      this.setState({
-        isValidEmail: false,
-      });
+      setIsValidEmail(false);
     }
   };
 
-  handleChangePassword = (e) => {
-    this.setState({ password: e.target.value, isWrongPassword: "" });
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+    setIsWrongPassword("");
     const passwordCheck =
       /^(?=.*[0-9])(?=.*[!@#$%^&*?])[a-zA-Z0-9!@#$%^&*?]{6,16}$/;
     const isValid = passwordCheck.test(e.target.value);
     if (isValid) {
-      this.setState({ isValidPassword: true });
+      setIsValidPassword(true);
     } else if (e.target.value === "") {
-      this.setState({ isValidPassword: false });
+      setIsValidPassword(false);
     } else {
-      this.setState({
-        isValidPassword: false,
-      });
+      setIsValidPassword(false);
     }
   };
 
-  onRegister = () => {
+  const onRegister = () => {
     const users = localStorage.getItem("users")
       ? JSON.parse(localStorage.getItem("users"))
       : [];
@@ -55,80 +49,70 @@ export default class Login extends React.Component {
     let getEmail = false;
     let id;
     for (let i = 0; i < users.length; i++) {
-      if (users[i].email === this.state.email) {
+      if (users[i].email === email) {
         getEmail = true;
         id = i;
       }
     }
     if (!getEmail) {
-      this.setState({
-        isExistEmail: "Email not found, please register",
-      });
-    } else if (users[id].password !== this.state.password) {
-      this.setState({
-        isWrongPassword: "Wrong password!",
-      });
+      setIsExistEmail("Email not found, please register");
+    } else if (users[id].password !== password) {
+      setIsWrongPassword("Wrong password!");
     } else {
       localStorage.setItem("currentUser", JSON.stringify([users[id]]));
+      window.location = "/";
     }
   };
 
-  render() {
-    const checkValidation =
-      this.state.isValidEmail &&
-      this.state.isValidPassword &&
-      !this.state.isExistEmail;
-    return (
-      <>
-        <Header />
-        <div className="w-full h-screen pt-32">
-          <div className="text-center mb-4 text-4xl">
-            <h1>Log in</h1>
-          </div>
-          <div className="flex justify-center">
-            <form noValidate className="w-full md:w-1/3 rounded-lg">
-              <input
-                className="mt-6 px-8  w-full border rounded py-2 text-gray-700 focus:outline-none"
-                value={this.state.email}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                placeholder="Email Address"
-                name="email"
-                autoComplete="email"
-                onChange={this.handleChangeEmail}
-              />
-              <p>{this.state.isExistEmail}</p>
-              <input
-                className="mt-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none"
-                value={this.state.password}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                placeholder="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={this.handleChangePassword}
-              />
-              <button
-                className="mt-6 w-full py-2 rounded-full bg-gray-900 text-gray-100 focus:outline-none"
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={!checkValidation}
-                onClick={this.onRegister}
-              >
-                Sign in
-              </button>
-            </form>
-          </div>
-        </div>
-      </>
-    );
-  }
+  const checkValidation = isValidEmail && isValidPassword && !isExistEmail;
+  return (
+    <>
+      <Header />
+      <div>
+        <h1>Log in</h1>
+        <form>
+          <input
+            className="mt-6 px-8  w-full border rounded py-2 text-gray-700 focus:outline-none"
+            value={email}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            placeholder="Email Address"
+            name="email"
+            autoComplete="email"
+            onChange={handleChangeEmail}
+          />
+          <p>{isExistEmail}</p>
+          <input
+            className="mt-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none"
+            value={password}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            placeholder="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            onChange={handleChangePassword}
+          />
+          <p>{isWrongPassword}</p>
+
+          <button
+            className="mt-6 w-full py-2 rounded-full bg-gray-900 text-gray-100 focus:outline-none"
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={!checkValidation}
+            onClick={onRegister}
+          >
+            Log in
+          </button>
+        </form>
+      </div>
+    </>
+  );
 }

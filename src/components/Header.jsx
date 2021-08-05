@@ -39,7 +39,7 @@ export default function Header({ handleChange }) {
                 )}
                 {localStorage.getItem("currentUser") ? (
                   <button className="text-gray-300 hover:bg-gray-700 hover:text-white px-20 py-2 rounded-md text-sm font-medium">
-                    <Link to="/login">Log out</Link>
+                    <Link to="/logout">Log out</Link>
                   </button>
                 ) : (
                   <button className="text-gray-300 hover:bg-gray-700 hover:text-white px-20 py-2 rounded-md text-sm font-medium">
