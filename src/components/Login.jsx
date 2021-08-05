@@ -68,8 +68,10 @@ export default function Login() {
   return (
     <>
       <Header />
-      <div>
-        <h1>Log in</h1>
+      <div className="w-full h-screen pt-32">
+        <div className="text-center mb-4 text-4xl">
+          <h1>Sign in</h1>
+        </div>
         <form>
           <input
             className="mt-6 px-8  w-full border rounded py-2 text-gray-700 focus:outline-none"

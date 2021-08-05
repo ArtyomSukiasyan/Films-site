@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import Films from "./Films";
 import axios from "axios";
 import FetchData from "./FetchData";
@@ -65,15 +65,21 @@ export default function General() {
             handleClickInfo={handleClickInfo}
           />
         </Route>
-        <Route exact path="/sign-in">
+        <Route path="/films/favorites">
+          {localStorage.getItem("currentUser") ? (
+          <Films />) : (
+          <Redirect to="/login" /> )}
+        </Route>
+
+        <Route path="/sign-in">
           <SignIn />
         </Route>
         {localStorage.getItem("currentUser") ? (
-          <Route exact path="/logout">
+          <Route path="/logout">
             <LogOut />
           </Route>
         ) : (
-          <Route exact path="/login">
+          <Route path="/login">
             <Login />
           </Route>
         )}
