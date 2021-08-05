@@ -1,10 +1,25 @@
 import Header from "./Header";
 import dataGenre from "./DataGenre";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
-export default function Films({ state, handleChange, handleClickInfo }) {
+
+
+export default function Films({ state }) {
+  const history = useHistory()
+  function handleClickInfo(idd) {
+    history.push(`/films/${idd}`);
+    const apiUrl = `https://api.themoviedb.org/3/movie/${idd}?api_key=a9b4a343adf7d98ac7614d76c835e0ea&language=en-US`;
+    axios({
+      method: "GET",
+      url: apiUrl,
+    }).catch((err) => {
+      console.warn(err);
+    });
+  }
   return (
     <>
-      <Header handleChange={handleChange} />
+      <Header />
       <div className="flex flex-wrap  bg-indigo-100 pt-16">
         <div className="container ml-auto mr-auto">
           {state.map((film) => (
@@ -14,15 +29,14 @@ export default function Films({ state, handleChange, handleClickInfo }) {
             >
               <div className="bg-white rounded-lg m-h-64 p-2 transform cursor-pointer hover:translate-y-3 hover:shadow-xl transition duration-200">
                 <figure className="mb-2">
-                  <img
-                    onClick={() => handleClickInfo(film.id)}
+                  <img  onClick={() => handleClickInfo(film.id)}
                     src={
                       film.backdrop_path
                         ? "https://image.tmdb.org/t/p/w500/" +
                           film.backdrop_path
                         : "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"
                     }
-                    alt=""
+                    alt={film.title}
                     className="h-64 ml-auto mr-auto"
                   />
                 </figure>

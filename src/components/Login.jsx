@@ -60,7 +60,6 @@ export default function Login() {
       setIsWrongPassword("Wrong password!");
     } else {
       localStorage.setItem("currentUser", JSON.stringify([users[id]]));
-      window.location = "/";
     }
   };
 

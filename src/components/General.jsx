@@ -12,7 +12,7 @@ export default function General() {
   const [state, setState] = useState([]);
   const [page, setPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
-  let history = useHistory();
+  const history = useHistory();
 
   const getData = useMemo(
     () => (searchValue ? SearchData : FetchData),
